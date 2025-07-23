@@ -1,0 +1,508 @@
+{
+  "faqs": [
+  {
+    "category": "activities",
+    "question": "Where can I rent a bicycle?",
+    "keywords": ["bicycle", "rent bicycle", "cycling", "bike rental"],
+    "answer": "We offer motorbike rentals on site. For bicycles, we generally don't recommend them as the roads are not generally safe for bicycles. 🚲"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Are kayaks available?",
+    "keywords": ["kayak", "kayaks", "paddle board"],
+    "answer": "You are welcome to use the kayaks at no cost! 🛶 Please send a photo to Tyler in the group chat of the condition of the kayak/paddle board. And please remember to send another photo when you are finished."
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Can I get a massage?",
+    "keywords": ["massage", "book massage", "massage booking", "spa"],
+    "answer": "Massages are available daily from 9am to 5pm. Please ask Wii in the restaurant or message us in the WhatsApp group to book. 💆‍♂️"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Can I request extra pillows, blankets, or towels?",
+    "keywords": ["extra pillow", "extra blanket", "more towels", "amenities"],
+    "answer": "You can change your towels anytime in the restaurant or by whatsapp request. We have a few different blankets for the bed. Just let us know what you need."
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Can I snorkel?",
+    "keywords": ["snorkeling", "snorkel", "mask", "fins"],
+    "answer": "Please help yourself to the large basket of snorkels and masks near the kitchen door in the restaurant. From time to time there may be a few fins or water socks available. 🤿🐠"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Do you have WiFi?",
+    "keywords": ["wifi", "wi-fi", "internet", "wifi password", "wireless"],
+    "answer": "Free WiFi is available throughout Coconut Beach. Network: “Coconut Beach” - Password: “customersonly!” 📶"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Do you provide towels for the beach?",
+    "keywords": ["towel", "beach towel", "pool towel", "towel service"],
+    "answer": "Yes, we provide towels for both beach and pool use. Please ask at the restaurant if you need extras. 🏖️"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Is the pool open?",
+    "keywords": ["pool", "swimming pool", "pool hours", "when is pool open"],
+    "answer": "The pool is for guests staying at Coconut Beach. Open 10am to sunset. Please keep the volume down for other guests. 🏊‍♀️🌅"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Is there a gym?",
+    "keywords": ["gym", "fitness", "exercise"],
+    "answer": "The mini gym is open from 7am until 10pm and is the last bungalow up on the right side of our road as you go up the hill. The door lock 🔒 code is 6060. Please lock when finished. 💪"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Is there a library or book exchange?",
+    "keywords": ["library", "books", "book exchange", "borrow book", "reading"],
+    "answer": "We have a small book exchange shelf. Feel free to borrow or swap a book during your stay."
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Is there mosquito spray available?",
+    "keywords": ["mosquito", "mosquito spray", "insect repellent", "bugs"],
+    "answer": "Yes, we provide mosquito spray in the restaurant. If you need more, please ask! 🦟"
+  },
+  {
+    "category": "amenities & facilities",
+    "question": "Is there parking?",
+    "keywords": ["parking", "car park", "where to park"],
+    "answer": "If renting bikes at Coconut Beach, please park near our restaurant. For anything else, please check with Tyler 🏍️"
+  },
+  {
+    "category": "amenities & safety",
+    "question": "Can I drink the tap water?",
+    "keywords": ["water", "tap water", "drink water", "is water safe", "safe to drink"],
+    "answer": "We recommend drinking only bottled or filtered water. Free filtered water is available in the restaurant for refills. 💧"
+  },
+  {
+    "category": "amenities & safety",
+    "question": "Do you have on-site security?",
+    "keywords": ["security", "safe", "is it safe", "guard", "safety"],
+    "answer": "Our staff are on-site 24/7 and the area is very safe. Lock valuables in your room when leaving. 🔐"
+  },
+  {
+    "category": "arrival & transport",
+    "question": "Can you help with ferry tickets or travel planning?",
+    "keywords": ["ferry", "ferry ticket", "travel plan", "arrange tickets", "boat"],
+    "answer": "We can book ferry tickets and help plan onward travel to Koh Samui, Koh Tao, or the mainland. Ask staff for options!"
+  },
+  {
+    "category": "arrival & transport",
+    "question": "Do you offer airport pickup?",
+    "keywords": ["airport", "airport pickup", "pick up", "transfer"],
+    "answer": "We can help arrange an airport pickup with advance notice. Please provide your flight details. ✈️"
+  },
+  {
+    "category": "arrival & transport",
+    "question": "How do I book a transfer from the airport to the hotel?",
+    "keywords": ["airport transfer", "book airport pickup", "get from airport"],
+    "answer": "At Samui Airport, immediately after the baggage area there is a ticket desk for the next available ferry, which includes a van to the ferry. If you send us the deatils we can meet you when the ferry arrives in Koh Phangan."
+  },
+  {
+    "category": "arrival & transport",
+    "question": "How do I get from the pier to Coconut Beach?",
+    "keywords": ["pier", "how to get from pier", "ferry", "arrive", "directions", "taxi", "transport"],
+    "answer": "If you need a pickup from the pier, we can arrange it for you! Please let us know your boat details in advance. Taxi service from the main pier is 500 THB. 🛺🚤"
+  },
+  {
+    "category": "arrival & transport",
+    "question": "Is there a minimum stay requirement?",
+    "keywords": ["minimum stay", "how many nights", "shortest stay", "min nights"],
+    "answer": "All bookings require a 5-night minimum, but please check with us for last-minute or low season exceptions."
+  },
+  {
+    "category": "arrival & transport",
+    "question": "What’s the best way to get around the island?",
+    "keywords": ["transport on island", "getting around", "island travel", "best way to travel"],
+    "answer": "You can rent motorbikes on site, use local taxis, or book boat taxis for island trips. Staff can help arrange any transport!"
+  },
+  {
+    "category": "beach & safety",
+    "question": "Is it safe to swim at the beach?",
+    "keywords": ["swim", "swimming", "safe to swim", "sea", "ocean safety"],
+    "answer": "The sea is generally calm and safe, especially in the center of the beach which has a sandy bottom. The sides of the beach have very sharp coral, so please stay close to the center. Always check conditions and avoid swimming during storms or high waves. 🏊‍♂️"
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "Can I check in early?",
+    "keywords": ["early check-in", "early arrival", "can I check in early"],
+    "answer": "Early check-in is subject to room availability. We’ll keep your bags safe in the restaurant until your room is ready."
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "Can I check out late?",
+    "keywords": ["late check-out", "can I check out late", "late checkout"],
+    "answer": "Late check-out is subject to availability. Please check with Tyler."
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "Can you store my luggage after checkout?",
+    "keywords": ["luggage", "bag storage", "store luggage", "after checkout"],
+    "answer": "Yes, we can securely store your bags after checkout so you can enjoy the day. 🎒"
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "How late can I check in?",
+    "keywords": ["late check-in", "arrive late", "check in late"],
+    "answer": "No problem! If you arrive after 10pm, just let us know in advance so someone can meet you. 24/7 staff available on request. 🌙"
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "What is the checkout process?",
+    "keywords": ["checkout", "checkout process", "leaving procedures"],
+    "answer": "Please let Tyler know what time your boat is departing Koh Phangan, and which boat company. Tyler will meet you in the restaurant 90min before your boat to pay the restaurant bill and any other costs. While you are in the restaurant, our staff will move your bags to the truck and make sure you have all your towels and your toilet is working. We will depart Coconut 1 hour before your boat. 🚤"
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "What time is check-in?",
+    "keywords": ["check in", "check-in time", "arrival", "earliest check in", "earliest check-in"],
+    "answer": "Hi! You’re welcome to arrive anytime. We will keep your bags safe in the restaurant so you can enjoy the beach, pool, sofas, or massage until your room is ready at 3pm latest."
+  },
+  {
+    "category": "check-in & check-out",
+    "question": "What time is check-out?",
+    "keywords": ["check out", "check-out time", "leaving time", "when do I need to leave", "when is checkout"],
+    "answer": "Check-out time is 12:00 PM 🕛. Let us know if you need a late check-out."
+  },
+  {
+    "category": "connectivity",
+    "question": "How do I get a SIM card?",
+    "keywords": ["sim", "sim card", "mobile data", "phone card", "internet"],
+    "answer": "SIM cards are available at the main pier and in the village. Staff can direct you to the nearest shop. 📱"
+  },
+  {
+    "category": "eco & environment",
+    "question": "Do you have eco-friendly practices at Coconut Beach?",
+    "keywords": ["eco", "green", "environment", "eco-friendly", "sustainability"],
+    "answer": "Yes! Nearly all of our power is generated on site by our solar panels. Our water is all sourced on site as well. We use refillable water dispensers, limit plastic use, offer linen reuse, and support local conservation. Please ask staff about more ways we’re going green. 🌱"
+  },
+  {
+    "category": "emergencies",
+    "question": "What do I do in an emergency?",
+    "keywords": ["emergency", "urgent", "medical"],
+    "answer": "For emergencies, call Tyler or Wii immediately via WhatsApp. Medical center is 15 minutes away. 🚑"
+  },
+  {
+    "category": "emergencies",
+    "question": "What’s the best way to contact staff in an emergency?",
+    "keywords": ["emergency", "urgent", "help", "contact staff", "who to call"],
+    "answer": "For emergencies, call or message Tyler or Wii on WhatsApp. The nearest medical center is 15 minutes away. 🚑"
+  },
+  {
+    "category": "events & groups",
+    "question": "Can you help organize a birthday or event?",
+    "keywords": ["birthday", "party", "event", "organize event", "celebration"],
+    "answer": "We can help arrange a cake, flowers or balloons if you let us know in advance."
+  },
+  {
+    "category": "events & parties",
+    "question": "How do I get to the Full Moon Party?",
+    "keywords": ["full moon", "full moon party", "haad rin", "party"],
+    "answer": "Taxis and boats are available to Haad Rin for the Full Moon Party. Please arrange transport early, as demand is high. 🌕🎉"
+  },
+  {
+    "category": "family",
+    "question": "Can you arrange babysitting?",
+    "keywords": ["babysitting", "nanny", "childcare", "childminder"],
+    "answer": "Babysitting can be arranged with sufficient notice. Let us know your needs and we’ll recommend local, trusted options."
+  },
+  {
+    "category": "family",
+    "question": "Do you have baby cots or high chairs?",
+    "keywords": ["baby cot", "crib", "high chair", "child", "baby", "infant"],
+    "answer": "Yes, we have baby cots and high chairs available. Please request in advance so we can prepare for your family. 👶"
+  },
+  {
+    "category": "family",
+    "question": "Is there a kids’ play area or toys?",
+    "keywords": ["kids", "play area", "toys", "children", "playroom"],
+    "answer": "We have a collection of beach toys, pool floats, and board games for kids. Please ask staff for access."
+  },
+  {
+    "category": "food & dining",
+    "question": "Are vegetarian or vegan options available?",
+    "keywords": ["vegetarian", "vegan", "plant-based", "food options"],
+    "answer": "Yes! Nearly every dish on our menu system is vegetarian by default with the option to add chicken or shrimp. As nearly every Thai dish has some essential non-vegan sauces, we recommend the vegan restaurant in our village called \"Foods & Roots\"."
+  },
+  {
+    "category": "food & dining",
+    "question": "Can I order food delivery from outside?",
+    "keywords": ["food delivery", "order food", "outside food", "delivery"],
+    "answer": "Yes, the most popular app for food delivery is KPG Delivery. You can find it in the iPhone or Android app stores or their website phangan-delivery.com"
+  },
+  {
+    "category": "food & dining",
+    "question": "Can I see the menu?",
+    "keywords": ["menu", "food menu", "see menu"],
+    "answer": "Please check our menu app at https://menu.coconut.holiday/ for all our delicious options! We start breakfast orders at 8:30am and last order for dinner is 8:30pm. 🥥🍤"
+  },
+  {
+    "category": "food & dining",
+    "question": "Can you cater to food allergies or dietary needs?",
+    "keywords": ["allergy", "allergies", "gluten free", "nut free", "special diet"],
+    "answer": "Sure, please come to the kitchen with photos on your phone to help the kitchen staff understand your allergies."
+  },
+  {
+    "category": "food & dining",
+    "question": "Can you pack a breakfast or lunch to go?",
+    "keywords": ["takeaway", "packed breakfast", "lunch to go", "picnic"],
+    "answer": "Yes! Any order in the restaurant can be made for Take Away. When ordering in our app just select Take Away as your table."
+  },
+  {
+    "category": "food & dining",
+    "question": "Is drinking water provided for free?",
+    "keywords": ["free water", "drinking water", "bottled water", "refill water"],
+    "answer": "Free filtered water is available in the restaurant for all guests. Please refill your bottles any time!"
+  },
+  {
+    "category": "food & dining",
+    "question": "What are the restaurant hours?",
+    "keywords": ["restaurant hours", "food times", "when is breakfast", "dinner"],
+    "answer": "We start breakfast orders at 8:30am and last order for dinner is 8:30pm. Please use our menu app for orders: https://menu.coconutbeachkohphangan.com 🍽️"
+  }
+,
+  {
+    "category": "health & safety",
+    "question": "Is there mosquito spray available?",
+    "keywords": ["mosquito", "mosquito spray", "insect repellent", "bugs"],
+    "answer": "Yes, we provide mosquito incense in the restaurant. If you need more, please ask! 🦟"
+  },
+  {
+    "category": "hotel services",
+    "question": "Can I rent a motorbike?",
+    "keywords": ["motorbike", "motorbike rental", "rent a scooter"],
+    "answer": "Motorbike Rental 🏍️\nPlease bring passport to restaurant\n\nPricing:\n• 125cc - 250 baht / 24 hours\n• 160cc - 300 baht / 24 hours\n\nSafety Video:\nhttps://youtu.be/YHQvcCD9CQQ\n\nImportant Rules:\n☑️ Please park in our parking lot at night\n☑️ Turn off bike at our gate and roll down to parking\n☑️ If going out before 9am please park outside gate\n☑️ If any accidents, please take to a bike shop to repair\n☑️ Please return with same level of gas. We charge 50 baht per liter if returned with less gas."
+  },
+  {
+    "category": "hotel services",
+    "question": "Can you help with printing or scanning documents?",
+    "keywords": ["print", "printer", "scan", "document", "printing"],
+    "answer": "We’re happy to help with small printing or scanning tasks. Ask at the restaurant or message staff for assistance."
+  },
+  {
+    "category": "hotel services",
+    "question": "How do I get housekeeping?",
+    "keywords": ["housekeeping", "room cleaning", "clean my room"],
+    "answer": "Most stays are 5 nights and include 1 cleaning during your stay. To request cleaning, please send a message to Wii in the WhatsApp group chat to schedule. 🧹"
+  },
+  {
+    "category": "hotel services",
+    "question": "Is room service available?",
+    "keywords": ["room service", "food to room", "order to room"],
+    "answer": "Food in the rooms can be tricky due to the monkeys that live in the area. To be safe we recommend eating in the restaurant."
+  },
+  {
+    "category": "hotel services",
+    "question": "Is there laundry service?",
+    "keywords": ["laundry", "wash clothes", "laundry service"],
+    "answer": "Please bring your laundry to the restaurant. We put it directly into the washing machine and are not responsible for any damage, so please remove any colors that might bleed or any special items. Cost is 80 THB/kg and usually takes 1 day. 👕"
+  },
+  {
+    "category": "hotel services",
+    "question": "Is transport available?",
+    "keywords": ["transport", "shuttle", "rides"],
+    "answer": "We can usually take you anywhere you need to go from 7am to 9pm. Rides to/from the village are 200 THB and we can wait up to 10mins. Rides to/from the main pier are 500 THB. Rides to Haad Rin or Thong Nai Pan are 1,000 THB. Please check with Tyler to schedule. 🚗"
+  },
+  {
+    "category": "hotel services",
+    "question": "When is reception open?",
+    "keywords": ["reception", "front desk", "reception hours"],
+    "answer": "Reception in the restaurant area is open 8am to 10pm, or message us via WhatsApp anytime! 📞"
+  },
+  {
+    "category": "local area",
+    "question": "Can I go diving?",
+    "keywords": ["diving", "scuba diving", "deep sea snorkeling"],
+    "answer": "Please let Tyler know if you are interested in Scuba Diving or deep sea snorkeling and Tyler will connect you with the best tour operator who will take care of everything for you! 🤿"
+  },
+  {
+    "category": "local area",
+    "question": "Can you arrange tours or trips?",
+    "keywords": ["tour", "tours", "excursions", "day trips", "trip", "sightseeing"],
+    "answer": "We can arrange trips to Ang Thong National Park, diving, snorkeling, and more! Ask Tyler for recommendations. 🏝️"
+  },
+  {
+    "category": "local area",
+    "question": "Can you recommend things to do with kids?",
+    "keywords": ["kids", "children", "family activities", "what to do with kids"],
+    "answer": "We have a safe beach and pool for kids, kayaks, and games. For excursions, we recommend snorkeling, local animal farms, and gentle hikes."
+  },
+  {
+    "category": "local area",
+    "question": "How do I get a taxi boat?",
+    "keywords": ["taxi boat", "boat to village", "taxi boats"],
+    "answer": "The taxi boats are independently owned and operated. They come and go regularly with the wind. They start about 10:30am and finish at sunset. You can message them via WhatsApp: Torn is at +66.062.415.4328 and Kai is at +66.093.629.4725. It’s better to message than call to avoid misunderstandings. 🚤"
+  },
+  {
+    "category": "local area",
+    "question": "How do I get to Bottle Beach?",
+    "keywords": ["bottle beach", "hike to bottle beach", "trail"],
+    "answer": "The hike to Bottle Beach takes 90 mins, requires good shoes, a hat, and a bottle of water. There are a few places to eat on Bottle Beach, and almost everyone takes a taxi boat back to Coconut Beach. The last boat back is typically 5pm. Do not take the trail along the water - it’s dangerous and takes 5 hours! 🥾🏖️"
+  },
+  {
+    "category": "local area",
+    "question": "How do I visit Ang Thong National Park?",
+    "keywords": ["angthong", "ang thong national park", "national park"],
+    "answer": "Please let Tyler know if you are interested in visiting Ang Thong National Park and Tyler will connect you with the best tour operator who will take care of everything for you! 🏝️"
+  },
+  {
+    "category": "local area",
+    "question": "Where can I buy groceries or snacks?",
+    "keywords": ["groceries", "snacks", "buy food", "shop", "convenience store"],
+    "answer": "There are several small convenience stores in the village, just 3 minutes by taxi. Staff can give directions."
+  },
+  {
+    "category": "local area",
+    "question": "Where can I rent a bicycle?",
+    "keywords": ["bicycle", "rent bicycle", "cycling", "bike rental"],
+    "answer": "We offer motorbike rentals on site. For bicycles, please ask Tyler and we can recommend a rental nearby. 🚲"
+  },
+  {
+    "category": "local area",
+    "question": "Where can I rent a car?",
+    "keywords": ["rent car", "car rental", "car hire", "car for rent"],
+    "answer": "We often have 1 truck available for hire. Ask Tyler or staff for details and they’ll connect you."
+  },
+  {
+    "category": "local area",
+    "question": "Where’s the closest pharmacy or clinic?",
+    "keywords": ["pharmacy", "clinic", "hospital", "medicine", "drugstore"],
+    "answer": "The nearest pharmacy is in the village, just a few minutes by taxi. For a clinic or medical center, staff can direct you or arrange transport."
+  },
+  {
+    "category": "local area",
+    "question": "Where’s the nearest ATM?",
+    "keywords": ["atm", "cash", "nearest atm", "where atm", "withdraw money"],
+    "answer": "The nearest ATM is in the village, a 3-minute taxi ride away. Staff can direct you. Most local businesses are cash-only."
+  },
+  {
+    "category": "money",
+    "question": "What’s the best way to get cash nearby?",
+    "keywords": ["atm", "cash", "get money", "where to get cash", "withdraw money"],
+    "answer": "There are ATMs in the nearby village at 7-Eleven. Most small businesses prefer cash. 💵"
+  },
+  {
+    "category": "payments",
+    "question": "Do you accept credit cards?",
+    "keywords": ["credit card", "pay by card", "visa", "mastercard", "payment", "cash"],
+    "answer": "We accept cash in Thai Baht. Most payments at Coconut Beach are cash only, but some nearby businesses may accept cards. 💳"
+  },
+  {
+    "category": "payments",
+    "question": "Do you accept payments by QR code or mobile wallet?",
+    "keywords": ["promptpay", "QR code", "mobile payment", "wallet", "thai pay"],
+    "answer": "We accept Thai PromptPay QR code for payment. Ask for our QR code at the restaurant!"
+  },
+  {
+    "category": "policies",
+    "question": "Can I smoke cannabis or vape at the hotel?",
+    "keywords": ["cannabis", "vape", "weed", "smoke weed", "marijuana"],
+    "answer": "As of today cannabis or ganja is illegal in Thailand, so we do not recommend using it anywhere on the island if there is anyone in the area."
+  },
+  {
+    "category": "policies",
+    "question": "Can I smoke in the rooms or public areas?",
+    "keywords": ["smoke", "smoking", "cigarette", "can I smoke"],
+    "answer": "All rooms are non-smoking. Smoking is allowed only in designated outdoor areas. Please be considerate of other guests."
+  },
+  {
+    "category": "policies",
+    "question": "Can I visit Coconut Beach if I’m not staying there?",
+    "keywords": ["visitor", "non-guest", "visit", "can friends visit"],
+    "answer": "Day visitors are welcome at our restaurant. Pool and amenities are reserved for registered guests."
+  },
+  {
+    "category": "policies",
+    "question": "What is your pet policy?",
+    "keywords": ["pets", "pet policy", "dog", "cat", "animals"],
+    "answer": "Please check with us in advance regarding pets. Generally, small, well-behaved animals are welcome. 🐶"
+  },
+  {
+    "category": "policies",
+    "question": "What’s the quiet hours policy?",
+    "keywords": ["quiet hours", "noise", "when to be quiet", "loud", "silence"],
+    "answer": "Quiet hours are from 10pm to 8am to ensure all guests have a peaceful stay. Please be considerate in public areas."
+  },
+  {
+    "category": "policies",
+    "question": "What’s your cancellation policy?",
+    "keywords": ["cancel", "cancellation", "refund", "policy"],
+    "answer": "Please check your booking confirmation for cancellation terms, or contact us directly for details. We’re always happy to help!"
+  },
+  {
+    "category": "safety & security",
+    "question": "Do you have on-site security?",
+    "keywords": ["security", "safe", "is it safe", "guard", "safety"],
+    "answer": "Our staff are on-site 24/7 and the area is very safe. Lock valuables in your room when leaving. 🔐"
+  },
+  {
+    "category": "safety & security",
+    "question": "Do you have safety deposit boxes?",
+    "keywords": ["safe", "deposit box", "valuables", "security box"],
+    "answer": "All rooms have a safety deposit box for valuables. Please lock your items inside and keep the code private."
+  },
+  {
+    "category": "safety & security",
+    "question": "Is the beach safe at night?",
+    "keywords": ["safe at night", "beach at night", "night swimming", "security"],
+    "answer": "The beach is generally safe, but we recommend avoiding swimming after dark."
+  },
+  {
+    "category": "safety & security",
+    "question": "Is there CCTV on the property?",
+    "keywords": ["cctv", "cameras", "security camera", "surveillance"],
+    "answer": "For your safety, we have discreet CCTV coverage in public areas. Guest privacy is always respected."
+  },
+  {
+    "category": "tech",
+    "question": "Can I rent a monitor or extra workspace?",
+    "keywords": ["monitor", "rent monitor", "work desk", "extra workspace"],
+    "answer": "There is a huge beautiful monitor in the mini-gym work space, which is located in bungalow B10. It is the last bungalow on the right as you walk up the hill."
+  },
+  {
+    "category": "tech",
+    "question": "Do you have backup power in case of outages?",
+    "keywords": ["backup power", "generator", "power cut", "electricity outage"],
+    "answer": "We have a backup generator to keep the lights on and essential services running during rare power outages."
+  },
+  {
+    "category": "tech",
+    "question": "Do you have fast internet for remote work?",
+    "keywords": ["fast internet", "remote work", "work online", "WiFi speed"],
+    "answer": "We offer high-speed fiber WiFi throughout the property. Great for remote work and video calls! Let us know if you need a quiet space."
+  },
+  {
+    "category": "tech",
+    "question": "Is there 24/7 WiFi coverage everywhere?",
+    "keywords": ["24/7 wifi", "wifi coverage", "wifi everywhere", "wifi all night"],
+    "answer": "Yes, our WiFi is available throughout the property and is on 24/7 for your convenience."
+  },
+  {
+    "category": "tech",
+    "question": "What power plug type do you use?",
+    "keywords": ["plug", "power plug", "outlet", "adapter", "electricity"],
+    "answer": "Thailand uses plug types A, B, and C (two round pins or flat pins). Voltage is 220V. Adapters are available upon request. 🔌"
+  },
+  {
+    "category": "wellness & spa",
+    "question": "Are yoga mats or yoga classes available?",
+    "keywords": ["yoga", "yoga mat", "yoga class", "stretching"],
+    "answer": "We have yoga mats available for guests. Occasionally, yoga classes are held nearby—ask staff for info or recommendations."
+  },
+  {
+    "category": "wellness & spa",
+    "question": "Can I book a private yoga or meditation session?",
+    "keywords": ["yoga", "private yoga", "meditation", "wellness class"],
+    "answer": "Best to ask the white restaurant at the other end of the beach which has yoga and meditation classes."
+  },
+  {
+    "category": "wellness & spa",
+    "question": "How do I book a massage?",
+    "keywords": ["massage", "book massage", "massage booking", "spa"],
+    "answer": "Massages are available daily from 9am to 7pm. Please ask Wii in the restaurant or message us in the WhatsApp group to book. 💆‍♂️"
+  }
+]

@@ -132,272 +132,197 @@
         <div class="response-bubble" id="responseBubble"></div>
     </div>
 
+    <script src="./node_modules/@openai/agents-realtime/dist/bundle/openai-realtime-agents.umd.js"></script>
     <script>
-        class VoiceChat {
-            constructor() {
-                // CONFIGURE YOUR API ENDPOINT HERE
-                this.apiEndpoint = '/api/session'; // Change this to your actual endpoint
+        async function fetchSessionToken() {
+            const response = await fetch('/api/session', { method: 'POST' });
+            if (response.ok) {
+                const data = await response.json();
+                return data.client_secret.value;
+            }
+            throw new Error('Failed to get session token');
+        }
+
+        async function fetchAgentInstructions() {
+            const response = await fetch('/api/instructions');
+            if (response.ok) {
+                const data = await response.json();
+                return data.instructions;
+            }
+            throw new Error('Failed to get agent instructions');
+        }
+
+        async function initializeVoiceChat() {
+            const recordButton = document.getElementById('recordButton');
+            const status = document.getElementById('status');
+            const responseBubble = document.getElementById('responseBubble');
+
+            let session = null;
+            let isRecording = false;
+
+            try {
+                status.textContent = 'Initializing...';
+                recordButton.disabled = true;
                 
-                this.recordButton = document.getElementById('recordButton');
-                this.status = document.getElementById('status');
-                this.responseBubble = document.getElementById('responseBubble');
+                // Get session token and instructions
+                const [sessionToken, instructions] = await Promise.all([
+                    fetchSessionToken(),
+                    fetchAgentInstructions()
+                ]);
+
+                console.log('Session token obtained, creating agent...');
                 
-                this.isRecording = false;
-                this.recognition = null;
-                this.sessionId = this.getSessionId();
+                // Create agent and session using the correct global object
+                const { RealtimeAgent, RealtimeSession } = window.OpenAIAgentsRealtime;
                 
-                this.init();
-            }
+                // Add English language enforcement to instructions
+                const englishInstructions = `${instructions}
 
-            getSessionId() {
-                // Get session ID from URL params or generate one
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('session') || this.generateSessionId();
-            }
-
-            generateSessionId() {
-                return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            }
-
-            init() {
-                this.checkBrowserSupport();
-                this.setupEventListeners();
-                this.setupSpeechRecognition();
-            }
-
-            checkBrowserSupport() {
-                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                    this.showError('Voice recognition is not supported in this browser. Please use Chrome, Safari, or Edge.');
-                    this.recordButton.disabled = true;
-                    return false;
-                }
-                return true;
-            }
-
-            setupEventListeners() {
-                // Support both mouse and touch events
-                this.recordButton.addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-                    this.startRecording();
+IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Thai, or any other language. All responses must be in clear, conversational English.`;
+                
+                const agent = new RealtimeAgent({ 
+                    name: 'Resort Helper', 
+                    instructions: englishInstructions
+                });
+                
+                session = new RealtimeSession(agent, {
+                    model: 'gpt-4o-realtime-preview-2025-06-03',
+                    voice: 'alloy',
+                    input_audio_format: 'pcm16',
+                    output_audio_format: 'pcm16',
+                    turn_detection: null, // Disable server VAD for manual push-to-talk
+                    input_audio_transcription: {
+                        model: 'whisper-1'
+                    }
                 });
 
-                this.recordButton.addEventListener('mouseup', (e) => {
-                    e.preventDefault();
-                    this.stopRecording();
+                console.log('Connecting to session...');
+                
+                // Connect to the session
+                await session.connect({ apiKey: sessionToken });
+                
+                console.log('Session connected successfully!');
+                
+                status.textContent = 'Ready! Press and hold to talk.';
+                recordButton.textContent = 'Press to talk';
+                recordButton.disabled = false;
+
+                // Set up event listeners
+                session.on('response.started', () => {
+                    console.log('Assistant started responding');
+                    status.textContent = 'Assistant is responding...';
                 });
 
-                this.recordButton.addEventListener('mouseleave', (e) => {
-                    if (this.isRecording) {
-                        this.stopRecording();
+                session.on('response.completed', (response) => {
+                    console.log('Assistant completed response:', response);
+                    status.textContent = 'Ready! Press and hold to talk.';
+                    
+                    // Display the response text
+                    if (response.output && response.output.length > 0) {
+                        const lastOutput = response.output[response.output.length - 1];
+                        if (lastOutput.type === 'message' && lastOutput.content) {
+                            const textContent = lastOutput.content.find(c => c.type === 'text');
+                            if (textContent) {
+                                responseBubble.textContent = textContent.text;
+                                responseBubble.style.display = 'block';
+                            }
+                        }
+                    }
+                });
+
+                session.on('error', (error) => {
+                    console.error('Session error:', error);
+                    status.textContent = 'Error occurred. Please refresh and try again.';
+                });
+
+                // Set up push-to-talk functionality using proper session buffer control
+                let isPTTUserSpeaking = false;
+                
+                const startRecording = () => {
+                    if (isRecording || !session) return;
+                    
+                    console.log('Starting push-to-talk recording...');
+                    
+                    // Interrupt any current response
+                    session.interrupt();
+                    
+                    // Clear the audio input buffer to start fresh
+                    session.transport.sendEvent({ type: 'input_audio_buffer.clear' });
+                    
+                    isRecording = true;
+                    isPTTUserSpeaking = true;
+                    recordButton.classList.add('recording');
+                    recordButton.textContent = 'Release to send';
+                    status.textContent = 'Listening... speak now!';
+                    responseBubble.style.display = 'none';
+                    
+                    console.log('Push-to-talk started - audio buffer cleared');
+                };
+                
+                const stopRecording = () => {
+                    if (!isRecording || !isPTTUserSpeaking) return;
+                    
+                    console.log('Stopping push-to-talk recording...');
+                    
+                    isRecording = false;
+                    isPTTUserSpeaking = false;
+                    recordButton.classList.remove('recording');
+                    recordButton.textContent = 'Press to talk';
+                    status.textContent = 'Processing...';
+                    
+                    // Commit the audio buffer and create response
+                    session.transport.sendEvent({ type: 'input_audio_buffer.commit' });
+                    session.transport.sendEvent({ type: 'response.create' });
+                    
+                    console.log('Push-to-talk stopped - audio committed and response requested');
+                };
+
+                // Mouse events
+                recordButton.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    startRecording();
+                });
+
+                recordButton.addEventListener('mouseup', (e) => {
+                    e.preventDefault();
+                    stopRecording();
+                });
+
+                recordButton.addEventListener('mouseleave', (e) => {
+                    if (isRecording) {
+                        stopRecording();
                     }
                 });
 
                 // Touch events for mobile
-                this.recordButton.addEventListener('touchstart', (e) => {
+                recordButton.addEventListener('touchstart', (e) => {
                     e.preventDefault();
-                    this.startRecording();
+                    startRecording();
                 });
 
-                this.recordButton.addEventListener('touchend', (e) => {
+                recordButton.addEventListener('touchend', (e) => {
                     e.preventDefault();
-                    this.stopRecording();
+                    stopRecording();
                 });
 
-                this.recordButton.addEventListener('touchcancel', (e) => {
+                recordButton.addEventListener('touchcancel', (e) => {
                     e.preventDefault();
-                    if (this.isRecording) {
-                        this.stopRecording();
+                    if (isRecording) {
+                        stopRecording();
                     }
                 });
-            }
 
-            setupSpeechRecognition() {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                
-                if (!SpeechRecognition) return;
-
-                this.recognition = new SpeechRecognition();
-                this.recognition.continuous = true;
-                this.recognition.interimResults = true;
-                this.recognition.lang = 'en-US';
-
-                this.recognition.onstart = () => {
-                    this.updateStatus('Listening...');
-                };
-
-                this.recognition.onresult = (event) => {
-                    let transcript = '';
-                    for (let i = event.resultIndex; i < event.results.length; i++) {
-                        transcript += event.results[i][0].transcript;
-                    }
-                    
-                    if (transcript.trim()) {
-                        this.updateStatus(`You said: "${transcript.trim()}"`);
-                    }
-                };
-
-                this.recognition.onerror = (event) => {
-                    console.error('Speech recognition error:', event.error);
-                    this.handleRecognitionError(event.error);
-                };
-
-                this.recognition.onend = () => {
-                    if (this.isRecording) {
-                        // If we're still supposed to be recording, restart
-                        this.recognition.start();
-                    }
-                };
-            }
-
-            startRecording() {
-                if (this.isRecording || !this.recognition) return;
-
-                this.isRecording = true;
-                this.recordButton.classList.add('recording');
-                this.recordButton.textContent = 'Listening...';
-                this.hideResponse();
-                
-                try {
-                    this.recognition.start();
-                } catch (error) {
-                    console.error('Error starting recognition:', error);
-                    this.handleRecognitionError('failed-to-start');
-                }
-            }
-
-            stopRecording() {
-                if (!this.isRecording) return;
-
-                this.isRecording = false;
-                this.recordButton.classList.remove('recording');
-                this.recordButton.textContent = 'Press to talk';
-                
-                if (this.recognition) {
-                    this.recognition.stop();
-                }
-
-                // Get the final transcript and send it
-                setTimeout(() => {
-                    this.processFinalTranscript();
-                }, 500);
-            }
-
-            processFinalTranscript() {
-                const statusText = this.status.textContent;
-                const transcriptMatch = statusText.match(/You said: "(.+)"/);
-                
-                if (transcriptMatch && transcriptMatch[1]) {
-                    const transcript = transcriptMatch[1].trim();
-                    this.sendToBot(transcript);
-                } else {
-                    this.updateStatus('No speech detected. Please try again.');
-                }
-            }
-
-            async sendToBot(transcript) {
-                this.updateStatus('Sending to assistant...');
-                this.showLoading();
-
-                try {
-                    const response = await fetch(this.apiEndpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            message: transcript,
-                            sessionId: this.sessionId,
-                            timestamp: new Date().toISOString()
-                        })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    this.displayResponse(data.response || data.message || 'I received your message!');
-                    this.updateStatus('');
-
-                    // Optional: Text-to-speech for the response
-                    if ('speechSynthesis' in window && data.response) {
-                        this.speakResponse(data.response);
-                    }
-
-                } catch (error) {
-                    console.error('Error sending to bot:', error);
-                    this.showError('Sorry, I couldn\'t process your request. Please try again.');
-                }
-            }
-
-            speakResponse(text) {
-                // Optional text-to-speech
-                try {
-                    const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.rate = 0.9;
-                    utterance.pitch = 1;
-                    utterance.volume = 0.8;
-                    speechSynthesis.speak(utterance);
-                } catch (error) {
-                    console.log('Text-to-speech not available:', error);
-                }
-            }
-
-            displayResponse(text) {
-                this.responseBubble.textContent = text;
-                this.responseBubble.classList.remove('error');
-                this.responseBubble.style.display = 'block';
-            }
-
-            showError(message) {
-                this.responseBubble.textContent = message;
-                this.responseBubble.classList.add('error');
-                this.responseBubble.style.display = 'block';
-                this.updateStatus('');
-            }
-
-            hideResponse() {
-                this.responseBubble.style.display = 'none';
-                this.responseBubble.classList.remove('error');
-            }
-
-            showLoading() {
-                this.status.innerHTML = 'Processing... <div class="loading"></div>';
-            }
-
-            updateStatus(message) {
-                this.status.textContent = message;
-            }
-
-            handleRecognitionError(error) {
-                this.isRecording = false;
-                this.recordButton.classList.remove('recording');
-                this.recordButton.textContent = 'Press to talk';
-
-                let errorMessage = 'Voice recognition error. Please try again.';
-                
-                switch (error) {
-                    case 'no-speech':
-                        errorMessage = 'No speech detected. Please try again.';
-                        break;
-                    case 'audio-capture':
-                        errorMessage = 'Microphone access denied. Please allow microphone access.';
-                        break;
-                    case 'not-allowed':
-                        errorMessage = 'Microphone permission denied. Please enable microphone access.';
-                        break;
-                    case 'network':
-                        errorMessage = 'Network error. Please check your connection.';
-                        break;
-                }
-
-                this.updateStatus(errorMessage);
+            } catch (error) {
+                console.error('Initialization error:', error);
+                status.textContent = 'Failed to initialize. Please refresh and try again.';
+                recordButton.textContent = 'Initialization Failed';
+                recordButton.disabled = true;
             }
         }
 
-        // Initialize the voice chat when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new VoiceChat();
+            console.log('DOM loaded, initializing voice chat...');
+            initializeVoiceChat();
         });
 
         // Prevent context menu on long press (mobile)

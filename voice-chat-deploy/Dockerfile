@@ -11,6 +11,7 @@ RUN npm install --omit=dev && npm cache clean --force
 # Copy application files
 COPY server.js ./
 COPY voice-chat.html ./
+COPY data ./data
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
