@@ -244,7 +244,12 @@
                 this.recognition.onend = () => {
                     if (this.isRecording) {
                         // If we're still supposed to be recording, restart
-                        this.recognition.start();
+                        // Add a small delay to avoid race conditions
+                        setTimeout(() => {
+                            if (this.isRecording) {
+                                this.recognition.start();
+                            }
+                        }, 100);
                     }
                 };
             }
@@ -273,7 +278,11 @@
                 this.recordButton.textContent = 'Press to talk';
                 
                 if (this.recognition) {
-                    this.recognition.stop();
+                    try {
+                        this.recognition.stop();
+                    } catch (error) {
+                        console.warn('Error stopping recognition:', error);
+                    }
                 }
 
                 // Get the final transcript and send it
