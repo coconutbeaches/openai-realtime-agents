@@ -1,0 +1,16 @@
+# Voice Chat Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY voice-chat-package.json package.json
+RUN npm install --production
+
+# Copy application files
+COPY server.js .
+COPY voice-chat.html .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

@@ -1,0 +1,17 @@
+{
+  "name": "resort-voice-chat",
+  "version": "1.0.0",
+  "description": "Voice chat interface for resort guests",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
