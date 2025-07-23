@@ -235,11 +235,37 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     status.textContent = 'Error occurred. Please refresh and try again.';
                 });
 
-                // Set up push-to-talk functionality using proper session buffer control
+                // Set up push-to-talk functionality with proper audio stream control
                 let isPTTUserSpeaking = false;
+                let audioStream = null;
+                
+                // Get access to the microphone stream for manual control
+                const initializeAudioStream = async () => {
+                    try {
+                        audioStream = await navigator.mediaDevices.getUserMedia({
+                            audio: {
+                                sampleRate: 24000,
+                                channelCount: 1,
+                                echoCancellation: true,
+                                noiseSuppression: true
+                            }
+                        });
+                        // Initially mute the audio tracks
+                        audioStream.getAudioTracks().forEach(track => {
+                            track.enabled = false;
+                        });
+                        console.log('Audio stream initialized and muted');
+                    } catch (err) {
+                        console.error('Failed to get audio stream:', err);
+                        throw err;
+                    }
+                };
+                
+                // Initialize the audio stream
+                await initializeAudioStream();
                 
                 const startRecording = () => {
-                    if (isRecording || !session) return;
+                    if (isRecording || !session || !audioStream) return;
                     
                     console.log('Starting push-to-talk recording...');
                     
@@ -249,6 +275,11 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     // Clear the audio input buffer to start fresh
                     session.transport.sendEvent({ type: 'input_audio_buffer.clear' });
                     
+                    // Enable the audio track to start capturing
+                    audioStream.getAudioTracks().forEach(track => {
+                        track.enabled = true;
+                    });
+                    
                     isRecording = true;
                     isPTTUserSpeaking = true;
                     recordButton.classList.add('recording');
@@ -256,13 +287,18 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     status.textContent = 'Listening... speak now!';
                     responseBubble.style.display = 'none';
                     
-                    console.log('Push-to-talk started - audio buffer cleared');
+                    console.log('Push-to-talk started - microphone enabled');
                 };
                 
                 const stopRecording = () => {
-                    if (!isRecording || !isPTTUserSpeaking) return;
+                    if (!isRecording || !isPTTUserSpeaking || !audioStream) return;
                     
                     console.log('Stopping push-to-talk recording...');
+                    
+                    // Disable the audio track to stop capturing
+                    audioStream.getAudioTracks().forEach(track => {
+                        track.enabled = false;
+                    });
                     
                     isRecording = false;
                     isPTTUserSpeaking = false;
@@ -274,7 +310,7 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     session.transport.sendEvent({ type: 'input_audio_buffer.commit' });
                     session.transport.sendEvent({ type: 'response.create' });
                     
-                    console.log('Push-to-talk stopped - audio committed and response requested');
+                    console.log('Push-to-talk stopped - microphone disabled, audio committed');
                 };
 
                 // Mouse events
