@@ -114,6 +114,34 @@
             100% { transform: rotate(360deg); }
         }
 
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: background-color 0.2s ease;
+        }
+
+        .close-button:hover {
+            background-color: #333;
+        }
+
+        .close-button:active {
+            background-color: #555;
+        }
+
         @media (max-width: 480px) {
             .record-button {
                 width: 160px;
@@ -131,6 +159,8 @@
         <div class="status" id="status"></div>
         <div class="response-bubble" id="responseBubble"></div>
     </div>
+
+    <button class="close-button" onclick="window.close();">&times;</button>
 
     <script src="./node_modules/@openai/agents-realtime/dist/bundle/openai-realtime-agents.umd.js"></script>
     <script>
