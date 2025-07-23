@@ -3,7 +3,7 @@ import {
   tool,
 } from '@openai/agents/realtime';
 
-import faqs from '../../data/flat_faqs.json';
+import faqs from '../../../data/flat_faqs.json';
 
 const lookupFaq = tool({
   name: 'lookupFAQ',
