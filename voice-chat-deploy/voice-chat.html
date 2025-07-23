@@ -265,61 +265,16 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     status.textContent = 'Error occurred. Please refresh and try again.';
                 });
 
-                // Set up push-to-talk functionality with manual audio recording
+                // Set up proper push-to-talk using OpenAI Realtime buffer control
                 let isPTTUserSpeaking = false;
-                let mediaRecorder = null;
-                let audioStream = null;
-                let audioChunks = [];
                 
-                // Initialize audio stream for manual recording
-                const initAudioStream = async () => {
-                    try {
-                        audioStream = await navigator.mediaDevices.getUserMedia({
-                            audio: {
-                                sampleRate: 24000,
-                                channelCount: 1,
-                                echoCancellation: true,
-                                noiseSuppression: true
-                            }
-                        });
-                        console.log('Audio stream initialized for manual recording');
-                    } catch (err) {
-                        console.error('Failed to get audio stream:', err);
-                        throw err;
-                    }
-                };
-                
-                await initAudioStream();
-                
-                const startRecording = () => {
-                    if (isRecording || !session || !audioStream) return;
+                const startPushToTalk = () => {
+                    if (isRecording || !session) return;
                     
-                    console.log('Starting push-to-talk recording...');
+                    console.log('Starting push-to-talk...');
                     
-                    // Clear any previous audio data
-                    audioChunks = [];
-                    
-                    // Create new MediaRecorder instance
-                    mediaRecorder = new MediaRecorder(audioStream, {
-                        mimeType: 'audio/webm;codecs=opus'
-                    });
-                    
-                    mediaRecorder.ondataavailable = (event) => {
-                        if (event.data.size > 0) {
-                            audioChunks.push(event.data);
-                        }
-                    };
-                    
-                    mediaRecorder.onstop = async () => {
-                        console.log('MediaRecorder stopped, processing audio...');
-                        if (audioChunks.length > 0) {
-                            const audioBlob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
-                            await processAudioBlob(audioBlob);
-                        }
-                    };
-                    
-                    // Start recording
-                    mediaRecorder.start(100); // Collect data every 100ms
+                    // Clear the input audio buffer - this is the key!
+                    session.transport.sendEvent({ type: 'input_audio_buffer.clear' });
                     
                     isRecording = true;
                     isPTTUserSpeaking = true;
@@ -328,13 +283,13 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     status.textContent = 'Listening... speak now!';
                     responseBubble.style.display = 'none';
                     
-                    console.log('Push-to-talk started - manual recording active');
+                    console.log('Push-to-talk started - audio buffer cleared');
                 };
                 
-                const stopRecording = () => {
-                    if (!isRecording || !isPTTUserSpeaking || !mediaRecorder) return;
+                const stopPushToTalk = () => {
+                    if (!isRecording || !isPTTUserSpeaking) return;
                     
-                    console.log('Stopping push-to-talk recording...');
+                    console.log('Stopping push-to-talk...');
                     
                     isRecording = false;
                     isPTTUserSpeaking = false;
@@ -342,71 +297,45 @@ IMPORTANT: You must ALWAYS respond in English only. Never respond in Spanish, Th
                     recordButton.textContent = 'Press to talk';
                     status.textContent = 'Processing...';
                     
-                    // Stop the recorder
-                    if (mediaRecorder.state === 'recording') {
-                        mediaRecorder.stop();
-                    }
+                    // Commit the audio buffer and create response - this triggers processing!
+                    session.transport.sendEvent({ type: 'input_audio_buffer.commit' });
+                    session.transport.sendEvent({ type: 'response.create' });
                     
-                    console.log('Push-to-talk stopped - processing audio');
-                };
-                
-                const processAudioBlob = async (audioBlob) => {
-                    try {
-                        // Convert to ArrayBuffer then to Base64
-                        const arrayBuffer = await audioBlob.arrayBuffer();
-                        const uint8Array = new Uint8Array(arrayBuffer);
-                        const base64Audio = btoa(String.fromCharCode.apply(null, uint8Array));
-                        
-                        console.log('Audio converted to base64, sending to session...');
-                        
-                        // Clear buffer and send audio data
-                        session.transport.sendEvent({ type: 'input_audio_buffer.clear' });
-                        session.transport.sendEvent({
-                            type: 'input_audio_buffer.append',
-                            audio: base64Audio
-                        });
-                        session.transport.sendEvent({ type: 'input_audio_buffer.commit' });
-                        session.transport.sendEvent({ type: 'response.create' });
-                        
-                        console.log('Audio sent to OpenAI Realtime API');
-                    } catch (error) {
-                        console.error('Error processing audio:', error);
-                        status.textContent = 'Error processing audio. Please try again.';
-                    }
+                    console.log('Push-to-talk stopped - audio buffer committed');
                 };
 
                 // Mouse events
                 recordButton.addEventListener('mousedown', (e) => {
                     e.preventDefault();
-                    startRecording();
+                    startPushToTalk();
                 });
 
                 recordButton.addEventListener('mouseup', (e) => {
                     e.preventDefault();
-                    stopRecording();
+                    stopPushToTalk();
                 });
 
                 recordButton.addEventListener('mouseleave', (e) => {
                     if (isRecording) {
-                        stopRecording();
+                        stopPushToTalk();
                     }
                 });
 
                 // Touch events for mobile
                 recordButton.addEventListener('touchstart', (e) => {
                     e.preventDefault();
-                    startRecording();
+                    startPushToTalk();
                 });
 
                 recordButton.addEventListener('touchend', (e) => {
                     e.preventDefault();
-                    stopRecording();
+                    stopPushToTalk();
                 });
 
                 recordButton.addEventListener('touchcancel', (e) => {
                     e.preventDefault();
                     if (isRecording) {
-                        stopRecording();
+                        stopPushToTalk();
                     }
                 });
 
