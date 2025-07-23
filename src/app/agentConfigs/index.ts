@@ -2,6 +2,7 @@ import { simpleHandoffScenario } from './simpleHandoff';
 import { customerServiceRetailScenario } from './customerServiceRetail';
 import { chatSupervisorScenario } from './chatSupervisor';
 import { resortHelperScenario } from './resortHelper';
+import { cocoScenario } from './coco';
 
 import type { RealtimeAgent } from '@openai/agents/realtime';
 
@@ -11,6 +12,7 @@ export const allAgentSets: Record<string, RealtimeAgent[]> = {
   customerServiceRetail: customerServiceRetailScenario,
   chatSupervisor: chatSupervisorScenario,
   resortHelper: resortHelperScenario,
+  coco: cocoScenario,
 };
 
 export const defaultAgentSetKey = 'simpleHandoff';
