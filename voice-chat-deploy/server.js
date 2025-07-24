@@ -1,34 +1,28 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const faqs = require('./data/flat_faqs.json');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Create FAQ context for agent instructions
+const faqContext = faqs.map(faq => 
+    `Q: ${faq.question}\nA: ${faq.answer}`
+  ).join('\n\n');
+
+const agentInstructions = `You are a helpful resort assistant at Coconut Beach Resort in Koh Phangan, Thailand. You help English-speaking guests with questions about amenities and services.\n\nIMPORTANT LANGUAGE REQUIREMENT: You must ALWAYS respond in English only. Never respond in Spanish, Thai, or any other language, regardless of what language the guest speaks to you in. All your responses must be in clear, conversational English.\n\nYou have access to this FAQ information:\n${faqContext}\n\nRespond in a friendly, helpful tone as if you're speaking directly to the guest. Keep responses concise but complete. If a guest asks about something not covered in the FAQs, provide general helpful resort assistance. Remember to always respond in English.`;
+
 // Serve static files
-app.use(express.static('.'));
+app.use(express.static('public'));
 
 // Parse JSON bodies
 app.use(express.json());
 
 // Serve the OpenAI Agents Realtime SDK from node_modules
 app.use('/lib', express.static(path.join(__dirname, 'node_modules/@openai/agents-realtime/dist')));
-
-// Create FAQ context for agent instructions
-function createAgentInstructions() {
-  const faqContext = faqs.map(faq => 
-    `Q: ${faq.question}\nA: ${faq.answer}`
-  ).join('\n\n');
-  
-  return `You are a helpful resort assistant at Coconut Beach Resort in Koh Phangan, Thailand. You help English-speaking guests with questions about amenities and services.
-
-IMPORTANT LANGUAGE REQUIREMENT: You must ALWAYS respond in English only. Never respond in Spanish, Thai, or any other language, regardless of what language the guest speaks to you in. All your responses must be in clear, conversational English.
-
-You have access to this FAQ information:
-${faqContext}
-
-Respond in a friendly, helpful tone as if you're speaking directly to the guest. Keep responses concise but complete. If a guest asks about something not covered in the FAQs, provide general helpful resort assistance. Remember to always respond in English.`;
-}
 
 // Serve the voice chat page
 app.get('/', (req, res) => {
@@ -42,7 +36,6 @@ app.post('/api/session', async (req, res) => {
             throw new Error('OPENAI_API_KEY environment variable is not set');
         }
 
-        const fetch = (await import('node-fetch')).default;
         const response = await fetch('https://api.openai.com/v1/realtime/sessions', {
             method: 'POST',
             headers: {
@@ -50,8 +43,8 @@ app.post('/api/session', async (req, res) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                model: 'gpt-4o-realtime-preview-2025-06-03',
-                voice: 'alloy'
+                model: process.env.OPENAI_MODEL || 'gpt-4o-realtime-preview-2025-06-03',
+                voice: process.env.OPENAI_VOICE || 'alloy'
             }),
         });
         
@@ -72,7 +65,7 @@ app.post('/api/session', async (req, res) => {
 
 // API endpoint for getting agent instructions
 app.get('/api/instructions', (req, res) => {
-    res.json({ instructions: createAgentInstructions() });
+    res.json({ instructions: agentInstructions });
 });
 
 app.listen(PORT, () => {
